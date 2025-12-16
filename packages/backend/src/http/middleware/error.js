@@ -1,3 +1,4 @@
+const { BaseError: SequelizeBaseError } = require("sequelize");
 const { ValidationError } = require("yup");
 const { BaseError } = require("../../errors");
 
@@ -15,11 +16,11 @@ module.exports = (err, req, res, next) => {
   }
 
   // Catch database exceptions
-  // if (err instanceof sequelize.BaseError) {
-  //   console.error(err);
-  //   res.status(500).send({ error: "A system error occured, please try again" });
-  //   return;
-  // }
+  if (err instanceof SequelizeBaseError) {
+    console.error(err);
+    res.status(500).send({ error: "A system error occured, please try again" });
+    return;
+  }
 
   // Catch other exceptions
   console.error(err);

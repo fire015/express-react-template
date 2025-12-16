@@ -22,7 +22,7 @@ CMD ["nginx", "-g", "daemon off;"]
 FROM base AS backend
 RUN rm -rf packages/frontend && rm -rf node_modules && \
     npm install --workspace=packages/backend --omit=dev --prefer-offline --no-audit
-EXPOSE 4000
 ENV NODE_ENV=production
+EXPOSE 4000
 USER node
 CMD ["npm", "start"]
