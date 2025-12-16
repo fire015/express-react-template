@@ -1,0 +1,67 @@
+name: my-project
+
+services:
+  traefik:
+    image: traefik:v3.6
+    container_name: traefik
+    command:
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      # - "--api.insecure=true"   # to enable dashboard
+      - "--certificatesresolvers.le.acme.storage=/certs/acme.json"
+      - "--certificatesresolvers.le.acme.tlschallenge=true"
+    ports:
+      - "80:80"
+      - "443:443"
+      # - "8080:8080"   # to enable dashboard
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./certs:/certs"
+    restart: unless-stopped
+
+  backend:
+    image: my-project/backend
+    build:
+      context: .
+      target: backend
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "1"
+    restart: unless-stopped
+
+  frontend:
+    image: my-project/frontend
+    build:
+      context: .
+      target: nginx
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`app.my-project.com`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=le"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "1"
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=my-project
+      - MYSQL_ROOT_PASSWORD=letmein
+    volumes:
+      - mysql:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  mysql:

@@ -1,0 +1,14 @@
+{
+  "name": "@my-project/backend",
+  "private": true,
+  "scripts": {
+    "dev": "node --watch-preserve-output --watch-path=./src src/app.js",
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1",
+    "yup": "^1.7.1"
+  }
+}

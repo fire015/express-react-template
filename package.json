@@ -1,0 +1,19 @@
+{
+  "name": "my-project",
+  "private": true,
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev:backend": "npm run -w packages/backend dev",
+    "dev:frontend": "npm run -w packages/frontend dev",
+    "dev": "concurrently -n backend,frontend -c green,cyan \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "build": "npm run -w packages/frontend build",
+    "start": "npm run -w packages/backend start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
