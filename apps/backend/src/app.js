@@ -1,7 +1,7 @@
-require("dotenv").config({ quiet: true });
-const express = require("express");
-const morgan = require("morgan");
-const routes = require("./http/routes");
+import "dotenv/config";
+import express from "express";
+import morgan from "morgan";
+import routes from "./http/routes/index.js";
 
 const PORT = process.env.PORT || 4000;
 const app = express();

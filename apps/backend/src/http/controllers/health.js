@@ -1,12 +1,12 @@
-const { sequelize } = require("../../models");
+import { ucFirst } from "@my-project/shared";
+import { sequelize } from "../../models/index.js";
 
-const healthCheck = async (req, res) => {
+export const healthCheck = async (req, res) => {
   try {
     await sequelize.authenticate({ raw: true });
-    res.send({ message: "Server is healthy" });
+    res.send({ message: ucFirst("server is healthy") });
   } catch (err) {
+    console.error(err);
     res.status(500).send({ error: "Failed to connect to database" });
   }
 };
-
-module.exports = { healthCheck };

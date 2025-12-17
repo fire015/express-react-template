@@ -1,8 +1,8 @@
-const { Sequelize } = require("sequelize");
-const { DB_NAME, DB_USER, DB_PASS, DB_HOST } = require("../config");
+import { Sequelize } from "sequelize";
+import config from "../config.js";
 
-module.exports = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
-  host: DB_HOST,
+const sequelize = new Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASS, {
+  host: config.DB_HOST,
   dialect: "mysql",
   logging: process.env.NODE_ENV === "production" ? false : console.log,
   define: {
@@ -15,3 +15,5 @@ module.exports = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     timezone: "Z",
   },
 });
+
+export default sequelize;

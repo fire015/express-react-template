@@ -1,9 +1,10 @@
-const express = require("express");
+import express from "express";
+import errorHandler from "../middleware/error.js";
+import * as healthController from "../controllers/health.js";
+
 const router = express.Router();
-const healthController = require("../controllers/health");
-const errorHandler = require("../middleware/error");
 
 router.get("/health", healthController.healthCheck);
 router.use(errorHandler);
 
-module.exports = router;
+export default router;

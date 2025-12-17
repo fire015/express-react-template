@@ -1,4 +1,4 @@
-const sequelize = require("./sequelize");
-const User = require("./user");
+import sequelize from "./sequelize.js";
+import User from "./user.js";
 
-module.exports = { sequelize, User };
+export { sequelize, User };

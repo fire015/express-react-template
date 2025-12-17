@@ -1,8 +1,8 @@
-const { BaseError: SequelizeBaseError } = require("sequelize");
-const { ValidationError } = require("yup");
-const { BaseError } = require("../../errors");
+import { BaseError as SequelizeBaseError } from "sequelize";
+import { ValidationError } from "yup";
+import { BaseError } from "../../errors/index.js";
 
-module.exports = (err, req, res, next) => {
+export default (err, req, res, next) => {
   // Catch yup validation exceptions
   if (err instanceof ValidationError) {
     res.status(400).send({ error: err.message });

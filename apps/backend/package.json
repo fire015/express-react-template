@@ -1,12 +1,14 @@
 {
   "name": "@my-project/backend",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node src/app.js",
     "dev": "node --watch-preserve-output --watch-path=./src src/app.js",
     "sync": "node src/sync.js"
   },
   "dependencies": {
+    "@my-project/shared": "*",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "morgan": "^1.10.1",

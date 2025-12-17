@@ -1,5 +1,5 @@
-require("dotenv").config({ quiet: true });
-const { sequelize } = require("./models");
+import "dotenv/config";
+import { sequelize } from "./models/index.js";
 
 async function sync() {
   let force = false;
