@@ -1,11 +1,7 @@
-# Base build stage
+# ---------- Base Build Stage ----------
 FROM node:22-alpine AS base
 WORKDIR /app
-
-# Copy source code
 COPY . .
-
-# Install dependencies
 RUN npm install
 
 # ---------- Frontend Stage ----------

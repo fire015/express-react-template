@@ -23,18 +23,6 @@ services:
       - "./certs:/certs"
     restart: unless-stopped
 
-  backend:
-    image: my-project/backend
-    build:
-      context: .
-      target: backend
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "1"
-    restart: unless-stopped
-
   frontend:
     image: my-project/frontend
     build:
@@ -45,6 +33,18 @@ services:
       - "traefik.http.routers.app.rule=Host(`app.my-project.com`)"
       - "traefik.http.routers.app.entrypoints=websecure"
       - "traefik.http.routers.app.tls.certresolver=le"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "1"
+    restart: unless-stopped
+
+  backend:
+    image: my-project/backend
+    build:
+      context: .
+      target: backend
     logging:
       driver: "json-file"
       options:

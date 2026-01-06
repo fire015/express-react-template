@@ -1,10 +1,11 @@
-# Express + React Template
+# Express + React Monorepo Template
 
-An opinionated monorepo of running dev and prod versions of Express (backend API) and React (frontend).
+An opinionated monorepo template for building and running both development and production environments using **Express** (backend API) and **React** (frontend).
 
-Dev runs on localhost, prod runs on SSL secured domain.
+* **Development** runs locally on `localhost`
+* **Production** runs on an SSL-secured domain
 
-Tested with Node.js 22.
+Tested and verified with **Node.js 22**.
 
 ## Local Development
 
